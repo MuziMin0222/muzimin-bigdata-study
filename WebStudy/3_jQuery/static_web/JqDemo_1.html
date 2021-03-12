@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="script/jquery.js">
+
+    </script>
+    <script type="text/javascript">
+        // window.onload = function () {
+        //     var element = document.getElementById("button");
+        //     element.onclick = function () {
+        //         alert("Js原生点击事件")
+        //     }
+        // }
+
+        $(function () {                     //表示页面加载完成之后，相当window.onload = function(){}
+           var $butObj = $("#button");      //表示按id查询标签对象
+           $butObj.click(function () {      //绑定单击事件
+               alert("jQuery的点击事件")
+           })
+        });
+    </script>
+</head>
+<body>
+    <button id="button">SayHello</button>
+</body>
+</html>

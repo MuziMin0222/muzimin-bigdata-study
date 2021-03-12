@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="script/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //内部插入
+            $("<h1>插入的标题</h1>").appendTo("div")
+            $("<h1>插入的标题</h1>").appendTo($("#div_1"))
+            $("<h1>插入的标题</h1>").prependTo("div")
+            $("<h1>插入的标题</h1>").prependTo($("#div_1"))
+
+            //外部插入
+            $("<h1>插入的标题</h1>").insertAfter("div")
+            $("<h1>插入的标题</h1>").insertAfter($("#div_1"))
+            $("<h1>插入的标题</h1>").insertBefore($("#div_1"))
+            $("<h1>插入的标题</h1>").insertBefore("div")
+
+            //替换:
+            $("div").replaceWith("<h1>用于替换div标签的标题</h1>")
+            $("#div_1").replaceWith("<h1>用于替换div标签的标题</h1>")
+            $("<h1>用于替换div标签的标题</h1>").replaceAll("div")
+
+            //删除
+            $("#div_1").remove()
+            $("div").empty()
+
+        })
+    </script>
+</head>
+<body>
+    <span><div id="div_1">This is a div tag</div></span>
+    <div id="div_2">this is a div tag too</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function onclickFunc() {
+            var userName = document.getElementById("user");
+            var spanObj = document.getElementById("span");
+
+            var value = userName.value;
+            //该正则表达式表示字符串由数字字母下划线组成，长度在5-12之间
+            var pat = /^\w{5,12}$/;
+            var bool = pat.test(value);
+            if (bool){
+                // alert("数据符合规范")
+                spanObj.innerHTML  = "数据符合规范"
+            }else {
+                // alert("数据不合规！！！！")
+                spanObj.innerHTML  = "数据不合规！！！！"
+            }
+        }
+    </script>
+</head>
+<body>
+    账号：<input type="text" id="user">
+    <span id="span" style="color: red"></span>
+    <button onclick="onclickFunc()">校验</button>
+</body>
+</html>

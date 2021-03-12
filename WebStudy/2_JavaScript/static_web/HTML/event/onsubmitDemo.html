@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function onsubmitFunc() {
+            alert("静态加载onsubmit，验证数据不合法，不提交表单信息")
+            return false
+        }
+
+        window.onload = function () {
+            var elementById = document.getElementById("form");
+            elementById.onsubmit = function () {
+                alert("动态加载onsubmit，验证数据不合法，不提交表单信息")
+                return false
+            }
+        }
+    </script>
+</head>
+<body>
+    <form action="http://localhost:8080" method="get" onsubmit="return onsubmitFunc()">
+        <input type="submit" value="静态加载">
+    </form><br>
+    <form id="form" action="http://localhost:8080" method="get">
+        <input type="submit" value="动态加载">
+    </form>
+</body>
+</html>

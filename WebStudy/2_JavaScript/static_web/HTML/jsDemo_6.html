@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        //定义一个无参函数
+        function fun1() {
+            alert("无参函数fun1被调用。。。");
+        }
+
+        fun1();
+
+        var func1 = function () {
+            alert("无参函数func1被调用。。。");
+        }
+        func1()
+
+        //定义带参函数
+        function fun2(a, b) {
+            alert("带参函数fun2被调用。。。a=>" + a + "----b=>" + b);
+        }
+
+        fun2(100, 200);
+
+        var func2 = function (a, b) {
+            alert("带参函数func2被调用。。。a=>" + a + "----b=>" + b);
+        }
+        func2(100, 200);
+
+        //定义带有返回值的函数
+        function fun3(a, b) {
+            return a + b;
+        }
+
+        alert("带有返回值的函数fun3，结果为：" + fun3(100, 200));
+
+        var func3 = function (a, b) {
+            return a + b;
+        }
+        alert("带有返回值的函数func3，结果为：" + func3(100, 200))
+
+        var func4 = function () {
+            for (var i = 0; i < arguments.length; i++) {
+                alert(arguments[i])
+            }
+        }
+        func4("aaaa",1111,true,null)
+    </script>
+</head>
+<body>
+
+</body>
+</html>

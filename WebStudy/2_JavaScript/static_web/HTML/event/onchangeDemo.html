@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function onchangeFunc() {
+            alert("爱好已经发送改变。。。。")
+        }
+
+        window.onload = function () {
+            var elementById = document.getElementById("select");
+            elementById.onchange = function () {
+                alert("擅长已经发送改变。。。。")
+            }
+        }
+
+    </script>
+</head>
+<body>
+<!--静态注册-->
+    爱好：<br>
+    <select onchange="onchangeFunc()">
+        <option>---请选择---</option>
+        <option>spark</option>
+        <option>flink</option>
+        <option>MapReduce</option>
+    </select><br>
+<!--动态注册-->
+    擅长：<br>
+    <select id="select">
+        <option>---请选择---</option>
+        <option>spark</option>
+        <option>flink</option>
+        <option>MapReduce</option>
+    </select>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="script/jquery.js">
+
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            alert("传入的参数时函数。。。")
+        })
+
+        window.onload = function () {
+            $("<div>传入参数是HTML字符串</div>").appendTo("body")
+
+            var input = $("#input");
+            input.blur(function () {
+                alert("传入的参数是选择器是。。。")
+            })
+
+            var elementById = document.getElementById("input");
+            alert(elementById)
+            alert($(elementById))
+        }
+    </script>
+</head>
+<body>
+<div>
+    <span id="span">div-span</span>
+    <input id="input" type="text"><br>
+    <input type="text"><br>
+</div>
+</body>
+</html>

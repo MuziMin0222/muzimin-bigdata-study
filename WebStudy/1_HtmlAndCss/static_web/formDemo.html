@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单测试</title>
+</head>
+<body>
+<form action="http://localhost:8080" method="get">
+    <h1 align="center">用户信息</h1>
+    <table align="center">
+        <tr>
+            <td>账号：</td>
+            <td><input type="text" name="user"></td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+            <td>性别：</td>
+            <td>
+                <input type="radio" name="sex" value="boy" checked="checked">男
+                <input type="radio" name="sex" value="girl">女
+            </td>
+        </tr>
+        <tr>
+            <td>爱好：</td>
+            <td>
+                <input type="checkbox" name="hobby" value="Java">Java
+                <input type="checkbox" name="hobby" value="Hadoop">Hadoop
+                <input type="checkbox" checked="checked" name="hobby" value="Spark">Spark
+            </td>
+        </tr>
+        <tr>
+            <td>国籍：</td>
+            <td><select name="country">
+                <option selected="selected" value="default">---请选择国籍---</option>
+                <option value="china">中国</option>
+                <option value="usa">美国</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="登录"></td>
+        </tr>
+        <tr>
+            <td><input type="reset" value="重置"></td>
+        </tr>
+        <tr>
+            <td><input type="button" value="这只是一个普通的按钮"></td>
+        </tr>
+        <tr>
+            <td><input type="file" name="fileload"><br></td>
+        </tr>
+        <tr>
+            <td>自我评价：</td>
+            <td><textarea rows="2" cols="10" name="desc">请在此输入</textarea></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

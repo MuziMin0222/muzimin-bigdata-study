@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        var elementsByName = document.getElementsByName("hobby");
+
+        function onclickAllFun() {
+            for (var i = 0; i < elementsByName.length; i++) {
+                elementsByName[i].checked = true
+            }
+        }
+
+        function onclickNoFun() {
+            for (var i = 0; i < elementsByName.length; i++) {
+                elementsByName[i].checked = false
+            }
+        }
+
+        function onclickResFun() {
+            for (var i = 0; i < elementsByName.length; i++) {
+                elementsByName[i].checked = !elementsByName[i].checked
+            }
+        }
+    </script>
+</head>
+<body>
+    爱好：<br>
+    <input type="checkbox" name="hobby" value="spark">spark
+    <input type="checkbox" name="hobby" value="flink">flink
+    <input type="checkbox" name="hobby" value="MapReduce">MapReduce
+    <br>
+    <button onclick="onclickAllFun()">全选</button>
+    <button onclick="onclickNoFun()">全不选</button>
+    <button onclick="onclickResFun()">反选</button>
+</body>
+</html>

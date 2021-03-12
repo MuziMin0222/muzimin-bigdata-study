@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function onclickFunc() {
+            alert("这是静态点击事件")
+        }
+
+        window.onload = function () {
+            //document 即jsDemo_9的整个文件对象
+            //getElementById 通过ID获取元素
+            var elementById = document.getElementById("btn01");
+            elementById.onclick = function () {
+                alert("动态注册的onclick事件")
+            }
+        }
+    </script>
+</head>
+<body>
+    <button onclick="onclickFunc()">按钮1</button>
+    <button id = "btn01">按钮2</button>
+</body>
+</html>

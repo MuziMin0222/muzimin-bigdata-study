@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        var arr = [];
+        alert(arr.length) //0
+
+        //在JavaScript中的数组，是可以根据最大下标值进行扩容操作的
+        arr[0] = "111"
+        alert(arr.length) //1
+
+        arr[4] = true
+        alert(arr.length) //5
+
+        //遍历
+        for (var i = 0; i < arr.length; i++) {
+            alert(arr[i])
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="script/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            //获取单个值
+            alert($(":checkbox:first").attr("value"))
+            alert($(":checkbox:last").attr("type"))
+            alert($(":checkbox").attr("name"))
+
+            //设置值
+            $("#checkbox1").attr("value","spark_1")
+
+            //prop同理，只不过是拿到其他属性值
+            alert($(":checkbox").prop("checked"))   //结果为true
+        })
+    </script>
+</head>
+<body>
+    多选:<br>
+    <input id="checkbox1" name="hobby" type="checkbox" checked="checked" value="spark">spark
+    <input id="checkbox2" name="hobby" type="checkbox" value="flink">flink
+    <input id="checkbox3" name="hobby" type="checkbox" value="MapReduce">MapReduce
+</body>
+</html>

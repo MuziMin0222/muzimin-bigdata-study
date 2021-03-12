@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+
+        //对象的定义以及初始化
+        var object = new Object();
+        object.name = "name"
+        object.age = 19
+        object.func = function () {
+            alert("name => " + this.name + ",age => " + this.age)
+        }
+
+        //对象的访问，变量名.属性/函数名();
+        alert(object.name)
+        object.func();
+
+        //定义对象的方式二
+        var obj = {
+            name: "name",
+            age: 20,
+            func:function () {
+                alert("这只是一个空方法")
+            }
+        };
+        //对象的访问
+        alert(obj.name);
+        obj.func()
+    </script>
+</head>
+<body>
+
+</body>
+</html>

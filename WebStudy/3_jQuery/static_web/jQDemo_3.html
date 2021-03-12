@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="script/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            alert($("div").html())
+            $("div").html("<h1>这是div中的标题</h1>")
+
+            alert($("div").text())
+            $("div").text("<h1>这是div中的标题</h1>")
+
+            //批量操作单选
+            $(":radio").val(["girl"])
+            $(":checkbox").val(["spark","flink"])
+            $("#multiple").val(["spark","MapReduce"])
+            $("#single").val(["flink"])
+
+            //会覆盖上面操作
+            $(":radio,:checkbox").val(["boy","MapReduce"])
+        })
+    </script>
+</head>
+<body>
+    <div>这是一个DIV标签</div>
+    单选：<br>
+    <input type="radio" name="sex" value="boy" checked="checked">男
+    <input type="radio" id="radio2" name="sex" value="girl">女
+    <br>
+    多选:<br>
+    <input id="checkbox1" type="checkbox" value="spark">spark
+    <input id="checkbox2" type="checkbox" value="flink">flink
+    <input id="checkbox3" type="checkbox" value="MapReduce">MapReduce
+    <br>
+    下拉多选：<br>
+    <select id="multiple" multiple="multiple" size="3">
+        <option value="spark">spark</option>
+        <option value="flink">flink</option>
+        <option value="MapReduce">MapReduce</option>
+    </select>
+    <br>
+    下拉单选：<br>
+    <select id="single">
+        <option>spark</option>
+        <option>flink</option>
+        <option>MapReduce</option>
+    </select>
+</body>
+</html>
