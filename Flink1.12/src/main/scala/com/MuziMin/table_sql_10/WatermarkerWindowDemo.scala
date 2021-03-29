@@ -23,7 +23,7 @@ object WatermarkerWindowDemo {
 
     val sourceDS = env.addSource(new MyOrderSource)
 
-    val OrderWithWatermarkDS = sourceDS.assignTimestampsAndWatermarks(
+    val OrderWithWatermarkDS: DataStream[Order] = sourceDS.assignTimestampsAndWatermarks(
       WatermarkStrategy
         .forBoundedOutOfOrderness[Order](Duration.ofSeconds(5))
         .withTimestampAssigner(new SerializableTimestampAssigner[Order] {

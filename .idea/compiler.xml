@@ -7,18 +7,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="WebStudy" />
         <module name="Flink1.12" />
         <module name="LeetCode" />
+        <module name="Arithmetic" />
         <module name="spark" />
         <module name="Redis" />
         <module name="Hbase_study" />
         <module name="HudiStudy" />
-        <module name="Arithmetic" />
+        <module name="WebStudy" />
+        <module name="AI_Study" />
         <module name="Data_Structure" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="AI_Study" target="1.8" />
       <module name="AnalysisOfUserBehaviors" target="1.8" />
       <module name="Arithmetic" target="1.8" />
       <module name="Data_Structure" target="1.8" />

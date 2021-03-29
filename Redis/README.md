@@ -517,3 +517,73 @@ redis集群的优势
 #### redis集群的搭建
 集群至少有奇数个节点,我们通过三台机器搭建三主三从  
 ![image-20210311184057851](upload/image-20210311184057851.png)
+
+1. 修改配置文件  
+   每台机器上启动2个redis服务，一个主节点服务：7001，一个从节点服务：7002
+   ![image-20210328002435249](upload/image-20210328002435249.png)
+   
+2. 在redis的安装目录下创建7001和7002目录，分别存储redis服务配置文件，日志文件和数据文件
+   ```shell script
+   cd /opt/link/redis
+   mkdir 7001 7002
+   ```
+3. redis.conf配置文件拷贝至7001目录，并命名为redis_7001.conf
+    ```shell script
+    cp redis.conf 7001/redis_7001.conf
+    ```
+4. 编辑配置文件
+    ```
+    第75行 bind 0.0.0.0
+    第94行 protected-mode no
+    第98行 port 7001
+    第247行 daemonize yes
+    第279行 pidfile "/var/run/redis_7001.pid"
+    第292行 logfile "/opt/software/redis-6.2.1/7001/log/redis.log"
+    第444行 dir "/opt/software/redis-6.2.1/7001/data/"
+    第1230行 appendonly yes
+    第1371行 cluster-config-file nodes-7001.conf
+    第1377行 cluster-node-timeout 15000
+    第1363行 cluster-enabled yes
+    若之前搭建了主从复制模式，需要将
+    #replicaof 192.168.147.152 6379 这个给注释
+    ```
+5. 在7001目录下创建log，data目录
+    ```shell script
+    [root@hadoop01 7001]# mkdir log data
+    ```
+6. 配置7002端口号启动redis服务
+    ```shell script
+    [root@hadoop01 redis]# cp 7001/redis_7001.conf 7002/redis_7002.conf
+    [root@hadoop01 redis]# vim 7002/redis_7002.conf
+    #在vim中进行全局替换
+    :%s/7001/7002/g
+
+    #创建目录
+    [root@hadoop01 redis]# mkdir 7002/log 7002/data
+    ```
+7. 将hadoop01中的redis发送到各个节点中
+    ```shell script
+    [root@hadoop01 software]# cd /opt/software
+    [root@hadoop01 software]# scp -r redis-6.2.1 root@hadoop02:$PWD
+    ```
+8. 启动redis服务
+    * 在三台机器上分别启动六个服务
+    ```shell script
+    redis-server /opt/link/redis/7001/redis_7001.conf
+    redis-server /opt/link/redis/7002/redis_7002.conf
+    ```
+    * 选择一台机器执行如下命令，创建集群
+    ```shell script
+    [root@hadoop01 software]# redis-cli --cluster create 192.168.147.150:7001 192.168.147.150:7002 192.168.147.151:7001 192.168.147.151:7002 192.168.147.152:7001 192.168.147.152:7002
+    ```
+    * 会出现如下日志：
+    ![image-20210328010756539](upload/image-20210328010756539.png)
+9. 测试集群，在任意一台机器上使用redis-cli客户端命令来连接redis服务
+    ```shell script
+    redis-cli -c -p 7001
+    进入后输入cluster nodes可以查看集群信息，输入info replication查看主从信息
+    ```
+10. 集群管理
+    * 添加新主节点：redis-cli --cluster add-node new_host:new_port existing_host:existing:port --cluster-master-id node_id
+    * 添加新从节点：redis-cli --cluster add-node new_host:new_port existing_host:existing:port --cluster-slave --cluster-master-id node_id
+    * hash槽重新分配，添加新节点后，需要对新添加的主节点进行hash槽重新分配，此时主节点才能存储数据，redis一共有16384个槽：redis-cli --cluster reshard host:port --cluster-from node_id --cluster-to node_id --cluster-slots <args> --cluster yes
