@@ -43,7 +43,6 @@
     <orderEntry type="library" name="Maven: org.apache.spark:spark-launcher_2.11:2.4.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.spark:spark-kvstore_2.11:2.4.6" level="project" />
     <orderEntry type="library" name="Maven: org.fusesource.leveldbjni:leveldbjni-all:1.8" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.6.7" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.6.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.spark:spark-network-common_2.11:2.4.6" level="project" />
     <orderEntry type="library" name="Maven: org.apache.spark:spark-network-shuffle_2.11:2.4.6" level="project" />
@@ -254,5 +253,22 @@
     <orderEntry type="library" name="Maven: com.yammer.metrics:metrics-core:2.2.0" level="project" />
     <orderEntry type="library" name="Maven: com.101tec:zkclient:0.3" level="project" />
     <orderEntry type="library" name="Maven: org.apache.kafka:kafka-clients:2.3.0" level="project" />
+    <orderEntry type="library" name="Maven: com.crealytics:spark-excel_2.11:0.11.1" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml:4.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi:4.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-collections4:4.2" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.poi:poi-ooxml-schemas:4.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.xmlbeans:xmlbeans:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.virtuald:curvesapi:1.04" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.8" level="project" />
+    <orderEntry type="library" name="Maven: com.norbitltd:spoiwo_2.11:1.4.1" level="project" />
+    <orderEntry type="library" name="Maven: org.joda:joda-convert:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.monitorjbl:xlsx-streamer:2.0.0" level="project" />
+    <orderEntry type="library" name="Maven: com.rackspace.apache:xerces2-xsd11:2.11.1" level="project" />
+    <orderEntry type="library" name="Maven: com.rackspace.eclipse.webtools.sourceediting:org.eclipse.wst.xml.xpath2.processor:2.1.100" level="project" />
+    <orderEntry type="library" name="Maven: edu.princeton.cup:java-cup:10k" level="project" />
+    <orderEntry type="library" name="Maven: com.ibm.icu:icu4j:4.6" level="project" />
+    <orderEntry type="library" name="Maven: xml-resolver:xml-resolver:1.2" level="project" />
+    <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.4.01" level="project" />
   </component>
 </module>

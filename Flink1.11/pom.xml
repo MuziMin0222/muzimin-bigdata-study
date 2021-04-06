@@ -28,6 +28,7 @@
             <version>1.11.2</version>
         </dependency>
         <!-- https://www.KuMaPai.com/open/org.apache.flink/flink-clients -->
+        <!--   在flink1.11之后，需要加入该jar才可以在本地运行程序     -->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-clients_2.11</artifactId>

@@ -587,3 +587,73 @@ redis集群的优势
     * 添加新主节点：redis-cli --cluster add-node new_host:new_port existing_host:existing:port --cluster-master-id node_id
     * 添加新从节点：redis-cli --cluster add-node new_host:new_port existing_host:existing:port --cluster-slave --cluster-master-id node_id
     * hash槽重新分配，添加新节点后，需要对新添加的主节点进行hash槽重新分配，此时主节点才能存储数据，redis一共有16384个槽：redis-cli --cluster reshard host:port --cluster-from node_id --cluster-to node_id --cluster-slots <args> --cluster yes
+11. javaAPI操作集群
+    ```java
+    private JedisCluster jedisCluster;
+    
+        @Before
+        public void before() {
+            HashSet<HostAndPort> set = new HashSet<>();
+            set.add(new HostAndPort("hadoop01", 7001));
+            set.add(new HostAndPort("hadoop01", 7002));
+            set.add(new HostAndPort("hadoop02", 7001));
+            set.add(new HostAndPort("hadoop02", 7002));
+            set.add(new HostAndPort("hadoop03", 7001));
+            set.add(new HostAndPort("hadoop03", 7002));
+    
+            //jedisPoolConfig配置对象
+            JedisPoolConfig config = new JedisPoolConfig();
+            //指定最大空闲连接为10个
+            config.setMaxIdle(10);
+            //最小空闲连接为5个
+            config.setMinIdle(5);
+            //最大等待时间为3000毫秒
+            config.setMaxWaitMillis(3000);
+            //最大连接数为50
+            config.setMaxTotal(50);
+    
+            jedisCluster = new JedisCluster(set, config);
+        }
+    
+        @Test
+        public void test() {
+            jedisCluster.set("k1", "v1");
+            System.out.println(jedisCluster.get("k1"));
+        }
+    
+        @After
+        public void after() {
+            jedisCluster.close();
+        }
+    ```
+
+## redis问题
+
+### redis的多数据库机制
+
+单机下的redis有16个database，集群架构下只有一个数据库
+
+### redis的批量操作
+
+在生产上采用的是redis cluster集群架构，不同的key会划分到不同的slot中，因此直接使用mset或者mget等操作是行不通的
+
+### redis集群不足的地方
+
+有一个key的value是hash类型，如果hash对象非常大，是不支持映射到不同节点的，只能映射到集群中的一个节点上，还有就是做批量操作比较麻烦
+
+### redis集群下如何进行批量操作
+
+如果数据少，直接串行get操作，如果执行的key很多，就使用hashtag保证这些key映射在同一台redis节点上
+
+### 缓存穿透
+
+查询key，缓存和数据源中都没有，频繁查询数据源
+
+解决缓存穿透的方案：
+
+	1. 当查询不存在时，也将结果保存在缓存中，但是会存在另外一个问题：大量没有查询结果的请求保存在缓存中，这时需要将请求的key设置的更短一些
+ 	2. 提取过滤掉不合法的请求，可以使用redis的布隆过滤器
+
+### 缓存击穿
+
+key对应的数据存在，但是在redis中过期，此时有大量的并发请求，这些请求发现缓存过期一般都会从后端DB加载数据并回设到缓存，这个时候大量并发请求可能将后端DB压垮
