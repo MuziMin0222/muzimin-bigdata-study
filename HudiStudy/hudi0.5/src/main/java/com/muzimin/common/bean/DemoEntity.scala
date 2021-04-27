@@ -5,4 +5,6 @@ package com.muzimin.common.bean
  * @date : 2021-04-25 10:11
  *       ${description}
  **/
-case class DemoEntity()
+case class DemoEntity(
+
+                     )

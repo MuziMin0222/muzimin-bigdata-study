@@ -1,8 +1,7 @@
 package com.MuziMin.project_11
 
 import com.MuziMin.project_11.bean.CategoryPojo
-import com.MuziMin.project_11.function.{PriceAggregate, WindowResult}
-import com.MuziMin.project_11.source.MySource_1
+import com.MuziMin.project_11.function.{FinalResultWindowProcess, PriceAggregate, WindowResult}
 import org.apache.flink.api.common.RuntimeExecutionMode
 import org.apache.flink.streaming.api.scala._
 import org.apache.flink.streaming.api.windowing.assigners.TumblingProcessingTimeWindows
@@ -22,7 +21,13 @@ object DoubleElevenBigScreem {
     env.setRuntimeMode(RuntimeExecutionMode.AUTOMATIC)
     env.setParallelism(1)
 
-    val sourceDS: DataStream[(String, Double)] = env.addSource(new MySource_1)
+    //val sourceDS: DataStream[(String, Double)] = env.addSource(new MySource_1)
+    val sourceDS = env.socketTextStream("localhost", 9999)
+      .flatMap(_.split(" "))
+      .map(line => {
+        val arr = line.split(",")
+        (arr(0), arr(1).toDouble)
+      })
 
     //每隔1s聚合一下截止到当前时间的各个分类的销售总金额
     val tempAggRes: DataStream[CategoryPojo] = sourceDS
@@ -30,14 +35,14 @@ object DoubleElevenBigScreem {
       //定义大小为一天的窗口,第二个参数表示中国使用的UTC+08:00时区比UTC时间早
       .window(TumblingProcessingTimeWindows.of(Time.days(1), Time.hours(8)))
       //1s触发一次
-      .trigger(ContinuousProcessingTimeTrigger.of(Time.seconds(5)))
+      .trigger(ContinuousProcessingTimeTrigger.of(Time.seconds(1)))
       .aggregate(new PriceAggregate, new WindowResult)
 
     tempAggRes.print("聚合结果------>")
 
-//    tempAggRes.keyBy(_.dateTime)
-//      .window(TumblingProcessingTimeWindows.of(Time.seconds(1)))
-//      .process(new FinalResultWindowProcess())
+    tempAggRes.keyBy(_.dateTime)
+      .window(TumblingProcessingTimeWindows.of(Time.seconds(1)))
+      .process(new FinalResultWindowProcess())
 
     env.execute()
   }

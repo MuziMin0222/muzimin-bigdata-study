@@ -12,7 +12,7 @@ import org.apache.flink.configuration.Configuration
 import org.apache.flink.streaming.api.functions.ProcessFunction
 import org.apache.flink.streaming.api.functions.co.BroadcastProcessFunction
 import org.apache.flink.streaming.api.functions.source.{RichSourceFunction, SourceFunction}
-import org.apache.flink.streaming.api.scala.{BroadcastConnectedStream, StreamExecutionEnvironment}
+import org.apache.flink.streaming.api.scala.{BroadcastConnectedStream, DataStream, StreamExecutionEnvironment}
 import org.apache.flink.util.Collector
 
 /**
@@ -26,7 +26,7 @@ object BroadCastStateDemo {
     val sourceDS = env.addSource(kafkaConsumer)
 
     //拿到Mysql中的数据
-    val mysqlDS = env.addSource(
+    val mysqlDS: DataStream[(String, (String, Int))] = env.addSource(
       new RichSourceFunction[(String, (String, Int))] {
         var conn: Connection = _
         var ps: PreparedStatement = _
