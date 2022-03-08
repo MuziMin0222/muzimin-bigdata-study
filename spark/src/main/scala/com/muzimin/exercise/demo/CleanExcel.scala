@@ -1,7 +1,10 @@
 package com.muzimin.exercise.demo
 
-import org.apache.spark.sql.{DataFrame, SparkSession}
+import java.text.SimpleDateFormat
+import java.util.Locale
+
 import org.apache.spark.sql.functions._
+import org.apache.spark.sql.{DataFrame, SparkSession}
 
 /**
  * @author : 李煌民
@@ -9,6 +12,7 @@ import org.apache.spark.sql.functions._
  *       ${description}
  **/
 object CleanExcel {
+
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder().appName("Demo").master("local[*]").getOrCreate()
 
@@ -17,23 +21,65 @@ object CleanExcel {
       .option("useHeader", "true")
       .option("treatEmptyValuesAsNulls", "true")
       .option("inferSchema", "true")
-      .load("D:\\关联设备.xlsx")
+      .load("D:\\add.xlsx")
       .na.fill("")
+      .withColumn("pubdate", parseDate(col("pubdate")))
 
-    val resDF = sourceDF.withColumn("检测项目管理编号",
-      explode(
-        split(
-          regexp_replace(
-            regexp_replace(col("检测项目管理编号"), "；", ";"), "/", ";"), ";")))
-      .withColumn("设备编号",
-        explode(
-          split(
-            regexp_replace(col("设备编号"), "；", ";"), ";")))
+    val countryDF = spark.read
+      .format("com.crealytics.spark.excel")
+      .option("useHeader", "true")
+      .option("treatEmptyValuesAsNulls", "true")
+      .option("inferSchema", "true")
+      .load("D:\\全球国家信息表（英文名）.xlsx")
+      .na.fill("")
+      .select(lower(col("国家或地区英文名")).as("国家或地区英文名"), lower(col("代码")).as("代码"))
 
+    sourceDF.show()
 
+    val resDF = sourceDF.join(countryDF, col("国家或地区英文名") === lower(col("country")), "left")
+      .withColumn("country", when(col("代码").isNotNull, col("代码")).otherwise(col("country")))
+      .select(
+        "document_id",
+        "title",
+        "url",
+        "media_type",
+        "country",
+        "sentiment",
+        "keywords",
+        "channel",
+        "region",
+        "pubdate",
+        "city",
+        "company",
+        "industry",
+        "product",
+        "sentence",
+        "reach",
+        "source_type",
+        "phrases"
+      )
 
-    save("D:\\res.xlsx", resDF)
+    resDF.show()
+
+    resDF.coalesce(1)
+        .write
+        .format("csv")
+        .option("header","true")
+        .option("delimiter","\u0001")
+        .save("D:\\resDF.csv")
+
+    //save("D:\\resDF.xlsx", resDF)
   }
+
+  val parseDate = udf(
+    (dateTime: String) => {
+      val format = new SimpleDateFormat("dd-MMM-yyyy hh:mma", Locale.US)
+      val parse = format.parse(dateTime)
+      val dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.sss'Z'")
+
+      dateFormat.format(parse)
+    }
+  )
 
 
   /**
