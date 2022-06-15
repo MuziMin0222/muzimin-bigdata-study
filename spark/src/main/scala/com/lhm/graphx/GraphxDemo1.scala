@@ -21,7 +21,7 @@ object GraphxDemo1 {
     val relationshipsRDD: RDD[Edge[String]] = sc.parallelize(Seq(
       Edge(3L, 7L, "collab"),
       Edge(5L, 3L, "advisor"),
-      //      Edge(2L, 5L, "colleague"),
+      Edge(2L, 5L, "colleague"),
       Edge(5L, 7L, "pi")))
 
     val defaultUser = ("john doe", "missing")
@@ -34,6 +34,8 @@ object GraphxDemo1 {
       .connectedComponents()
       .vertices
     vertices.foreach(println(_))
+
+    println("------")
 
     //拿到顶点对应的所有值
     val joinRDD: RDD[(VertexId, (VertexId, (String, String)))] = vertices.join(usersRDD)
