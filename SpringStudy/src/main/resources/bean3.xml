@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="collection" class="com.muzimin.bean.CollectionBean">
+        <property name="arr">
+            <array>
+                <value>a</value>
+                <value>b</value>
+                <value>c</value>
+            </array>
+        </property>
+        <property name="list">
+            <list>
+                <value>aaa</value>
+                <value>bbb</value>
+                <value>ccc</value>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="a" value="b"/>
+                <entry key="aa" value="bb"/>
+                <entry key="aaa" value="bbb"/>
+            </map>
+        </property>
+        <property name="set">
+            <set>
+                <value>fdsa</value>
+                <value>fdsa</value>
+            </set>
+        </property>
+
+        <property name="userList">
+            <list>
+                <ref bean="user1"/>
+                <ref bean="user2"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="user1" class="com.muzimin.bean.User">
+        <property name="age" value="123"/>
+        <property name="name" value="muzimin"/>
+    </bean>
+
+    <bean id="user2" class="com.muzimin.bean.User">
+        <property name="age" value="155"/>
+        <property name="name" value="lhm"/>
+    </bean>
+</beans>

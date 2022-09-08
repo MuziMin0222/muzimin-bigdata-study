@@ -1,3 +1,4 @@
+import com.lhm.graphx.page_rank.pregel.InputDataFlow
 
 /**
  * @author : 李煌民
@@ -6,8 +7,9 @@
  **/
 object Demo {
   def main(args: Array[String]): Unit = {
-    val str = "\"fdsafa\"\u0001\"\"\u0001\"\"\u0001\"\"\u0001\"\"\u0001\"\"\u0001\"\"\u0001\"\"\u0001\"\"\u0001\"\"\u0001\"\"\u0001\"\"\u0001\"\"\u0001\"\"\u0001\"\"\u0001\"\"\u0001\"\"\u0001\"\""
 
-    println(str.replaceAll("\"\"","").split("\u0001").length)
+    Seq("1\t\"William\"")
+      .flatMap(InputDataFlow.parseNames)
+      .foreach(println)
   }
 }
