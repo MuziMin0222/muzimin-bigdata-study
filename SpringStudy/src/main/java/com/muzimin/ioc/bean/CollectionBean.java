@@ -1,4 +1,4 @@
-package com.muzimin.bean;
+package com.muzimin.ioc.bean;
 
 import java.util.Arrays;
 import java.util.List;

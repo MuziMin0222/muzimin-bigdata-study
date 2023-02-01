@@ -4,29 +4,29 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--引入外部对象-->
-    <bean id="userService" class="com.muzimin.service.UserService">
+    <bean id="userService" class="com.muzimin.ioc.service.UserService">
         <property name="userDao" ref="userDao"/>
     </bean>
 
-    <bean id="userDao" class="com.muzimin.dao.impl.UserDaoImpl"/>
+    <bean id="userDao" class="com.muzimin.ioc.dao.impl.UserDaoImpl"/>
 
     <!--使用内部bean创建对象-->
-    <bean id="emp" class="com.muzimin.bean.Employee">
+    <bean id="emp" class="com.muzimin.ioc.bean.Employee">
         <property name="name" value="muzimin"/>
         <property name="age" value="12"/>
         <property name="dept">
-            <bean class="com.muzimin.bean.Dept">
+            <bean class="com.muzimin.ioc.bean.Dept">
                 <property name="dName" value="交付部"/>
             </bean>
         </property>
     </bean>
 
     <!--级联赋值-->
-    <bean id="emp01" class="com.muzimin.bean.Employee">
+    <bean id="emp01" class="com.muzimin.ioc.bean.Employee">
         <property name="name" value="muzimin"/>
         <property name="age" value="12"/>
         <property name="dept">
-            <bean class="com.muzimin.bean.Dept"/>
+            <bean class="com.muzimin.ioc.bean.Dept"/>
         </property>
         <property name="dept.dName" value="研发部"/>
     </bean>

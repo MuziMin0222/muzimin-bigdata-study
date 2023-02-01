@@ -5,17 +5,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!--bean标签里头表示创建对象-->
-    <bean id="user" class="com.muzimin.bean.User">
+    <bean id="user" class="com.muzimin.ioc.bean.User">
         <!--property里头表示设置属性-->
         <property name="name" value="muzimin"></property>
         <property name="age" value="23"></property>
     </bean>
 
     <!--通过p标签进行属性配置-->
-    <bean id="user01" class="com.muzimin.bean.User" p:name="lhm" p:age="24"></bean>
+    <bean id="user01" class="com.muzimin.ioc.bean.User" p:name="lhm" p:age="24"></bean>
 
     <!--给属性赋予特殊符号-->
-    <bean id="order01" class="com.muzimin.bean.Order">
+    <bean id="order01" class="com.muzimin.ioc.bean.Order">
         <!--给属性赋予Null值-->
         <property name="orderName">
             <null/>
@@ -29,7 +29,7 @@
     </bean>
 
     <!--使用有参构造创建对象-->
-    <bean id="order" class="com.muzimin.bean.Order">
+    <bean id="order" class="com.muzimin.ioc.bean.Order">
         <constructor-arg name="orderName" value="MapBook Pro"></constructor-arg>
         <constructor-arg name="price" value="12999"></constructor-arg>
     </bean>

@@ -1,6 +1,6 @@
-package com.muzimin.dao.impl;
+package com.muzimin.ioc.dao.impl;
 
-import com.muzimin.dao.UserDao;
+import com.muzimin.ioc.dao.UserDao;
 
 /**
  * @author: 李煌民

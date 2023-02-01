@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="collection" class="com.muzimin.bean.CollectionBean">
+    <bean id="collection" class="com.muzimin.ioc.bean.CollectionBean">
         <property name="arr">
             <array>
                 <value>a</value>
@@ -40,12 +40,12 @@
         </property>
     </bean>
 
-    <bean id="user1" class="com.muzimin.bean.User">
+    <bean id="user1" class="com.muzimin.ioc.bean.User">
         <property name="age" value="123"/>
         <property name="name" value="muzimin"/>
     </bean>
 
-    <bean id="user2" class="com.muzimin.bean.User">
+    <bean id="user2" class="com.muzimin.ioc.bean.User">
         <property name="age" value="155"/>
         <property name="name" value="lhm"/>
     </bean>

@@ -1,7 +1,7 @@
-package com.muzimin;
+package com.muzimin.ioc;
 
-import com.muzimin.bean.Employee;
-import com.muzimin.service.UserService;
+import com.muzimin.ioc.bean.Employee;
+import com.muzimin.ioc.service.UserService;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

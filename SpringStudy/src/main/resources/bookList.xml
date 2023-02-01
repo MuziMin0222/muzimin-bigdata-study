@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!--使用util标签完成list集合注入提取-->
+    <util:list id="booklist">
+        <value>Java</value>
+        <value>Scala</value>
+    </util:list>
+
+    <bean id="book" class="com.muzimin.ioc.bean.Books">
+        <property name="bookList" ref="booklist">
+
+        </property>
+    </bean>
+
+    <bean id="book1" class="com.muzimin.ioc.bean.Books">
+        <property name="bookList" ref="booklist">
+
+        </property>
+    </bean>
+
+</beans>

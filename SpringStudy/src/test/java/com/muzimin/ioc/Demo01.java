@@ -1,7 +1,7 @@
-package com.muzimin;
+package com.muzimin.ioc;
 
-import com.muzimin.bean.Order;
-import com.muzimin.bean.User;
+import com.muzimin.ioc.bean.Order;
+import com.muzimin.ioc.bean.User;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

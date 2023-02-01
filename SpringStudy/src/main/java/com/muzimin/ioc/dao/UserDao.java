@@ -1,4 +1,4 @@
-package com.muzimin.dao;
+package com.muzimin.ioc.dao;
 
 /**
  * @author: 李煌民

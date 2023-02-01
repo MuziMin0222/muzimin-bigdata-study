@@ -1,4 +1,4 @@
-package com.muzimin.bean;
+package com.muzimin.ioc.bean;
 
 /**
  * @author: 李煌民

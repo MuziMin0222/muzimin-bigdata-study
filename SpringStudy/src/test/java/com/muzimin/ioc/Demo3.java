@@ -1,6 +1,6 @@
-package com.muzimin;
+package com.muzimin.ioc;
 
-import com.muzimin.bean.CollectionBean;
+import com.muzimin.ioc.bean.CollectionBean;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
