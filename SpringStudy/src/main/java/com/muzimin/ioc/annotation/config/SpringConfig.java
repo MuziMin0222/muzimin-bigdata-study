@@ -8,6 +8,6 @@ import org.springframework.context.annotation.Configuration;
  * @date: 2023-02-01 16:06
  **/
 @Configuration
-@ComponentScan(basePackages = {"com.muzimin.aop"})
+@ComponentScan(basePackages = {"com.muzimin.ioc.annotation"})
 public class SpringConfig {
 }
