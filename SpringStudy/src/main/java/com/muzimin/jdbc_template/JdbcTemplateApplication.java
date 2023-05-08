@@ -12,10 +12,25 @@ public class JdbcTemplateApplication {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("jdbc_template01.xml");
         BookService bookService = context.getBean("bookService", BookService.class);
-        Book book = new Book();
+
+        //add
+        /*Book book = new Book();
         book.setUserId("1");
         book.setUserName("2");
         book.setUserStatus("3");
-        bookService.addBook(book);
+        bookService.addBook(book);*/
+
+        //update
+        /*Book book = new Book();
+        book.setUserStatus("3");
+        book.setUserName("2");
+        book.setUserId("update");
+        bookService.updateBook(book);*/
+
+        //delete
+        //bookService.deleteBook("update");
+
+        //find count
+        System.out.println(bookService.findCount());
     }
 }
