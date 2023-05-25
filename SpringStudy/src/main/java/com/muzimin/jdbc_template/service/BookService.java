@@ -5,6 +5,9 @@ import com.muzimin.jdbc_template.entity.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author: 李煌民
  * @date: 2023-03-09 12:03
@@ -17,7 +20,7 @@ public class BookService {
     @Autowired
     private BookDao bookDao;
 
-    public void addBook(Book book){
+    public void addBook(Book book) {
         bookDao.add(book);
     }
 
@@ -31,5 +34,25 @@ public class BookService {
 
     public int findCount() {
         return bookDao.findCount();
+    }
+
+    public Book findInfo(String id) {
+        return bookDao.findInfoById(id);
+    }
+
+    public List<Book> findInfoList() {
+        return bookDao.findInfos();
+    }
+
+    public void batchAdd(List<Object[]> args) {
+        bookDao.batchAdd(args);
+    }
+
+    public void batchUpdate(ArrayList<Object[]> updateList) {
+        bookDao.batchUpdate(updateList);
+    }
+
+    public void batchDelete(ArrayList<Object[]> deleteList) {
+        bookDao.batchDelete(deleteList);
     }
 }
