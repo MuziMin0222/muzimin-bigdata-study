@@ -1,8 +1,11 @@
-package com.muzimin.transfer_money_case.service;
+package com.muzimin.transfer_spring.xml_file.service;
 
 import com.muzimin.transfer_money_case.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author: 李煌民
@@ -15,19 +18,12 @@ public class UserService {
 
     public void transferMoney() {
         try {
-            //开启事务
-            //xxx
-
-            //业务操作
             userDao.reduceMoney();
 
             int i = 1 / 0;
 
             userDao.addMoney();
-
-            //没有异常，提交事物
         } catch (Exception e) {
-            // 出现异常，事务回滚
             e.printStackTrace();
         }
 
