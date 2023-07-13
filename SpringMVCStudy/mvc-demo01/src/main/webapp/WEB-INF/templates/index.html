@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<h1>Hello World</h1>
+<a th:href="@{/target}">访问目标页面</a>
+<p></p>
+
+<a th:href="@{/test/success}">访问成功页面设置的Value为/test/success</a>
+<p></p>
+<a th:href="@{/test/win}">访问成功页面设置的Value为/test/win</a>
+<p></p>
+<a th:href="@{/test/win}">测试requestMapping注解的method属性GET请求</a>
+<p></p>
+<form th:action="@{/test/win}" method="post">
+    <input type="submit" value="测试requestMapping注解的method属性POST请求">
+</form>
+<p></p>
+<form th:action="@{/test/aaa}" method="post">
+    <input type="submit" value="测试postMapping注解">
+</form>
+<p></p>
+<a th:href="@{/test/testParams(params='aaa',password='123456')}">测试requestMapping注解的params</a> <br>
+<a th:href="@{/test/testAnt}">测试requestMapping注解的ant风格---?单一字符</a> <br>
+<a th:href="@{/test/testAnt}">测试requestMapping注解的ant风格---*0或者多个字符</a> <br>
+<a th:href="@{/test/aaa/testAnt}">测试requestMapping注解的ant风格---**0层或者多层</a> <br>
+<a th:href="@{/test/testPlaceholder/2/muzimin}">测试requestMapping注解的占位符</a> <br>
+</body>
+</html>
