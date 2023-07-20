@@ -1,5 +1,6 @@
 package com.muzimin.controller;
 
+import com.muzimin.bean.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -54,6 +55,12 @@ public class TestParamsController {
         System.out.println("Host:" + host);
         System.out.println("JSESSIONID:" + jsessionId);
 
+        return "success";
+    }
+
+    @RequestMapping("/testParams3")
+    public String testParams3(User user) {
+        System.out.println(user);
         return "success";
     }
 }
