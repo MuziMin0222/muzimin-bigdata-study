@@ -6,5 +6,16 @@
 </head>
 <body>
 <a th:href="@{/testServletApi(username='muzimin',password=123456)}">测试通过requestServletAPI获取参数</a> <br>
+
+<a th:href="@{/testParams(username='muzimin',password=123456)}">测试通过控制器形参获取参数</a> <br>
+
+<form th:action="@{/testParams2}" method="get">
+    用户名：<input type="text" name="username"><br>
+    密码：<input type="password" name="password"><br>
+    hobby：<input type="checkbox" name="hobby" value="a"> a
+    <input type="checkbox" name="hobby" value="b"> b
+    <input type="checkbox" name="hobby" value="c"> c <br>
+    <input type="submit" value="测试通过控制器形参获取多项参数">
+</form>
 </body>
 </html>
