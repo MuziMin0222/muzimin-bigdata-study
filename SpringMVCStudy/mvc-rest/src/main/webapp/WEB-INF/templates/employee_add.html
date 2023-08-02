@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加员工</title>
+</head>
+<body>
+<form th:action="@{/employee}" method="post">
+    userName: <input type="text" name="userName"><br>
+    email: <input type="text" name="email"><br>
+    gender: <input type="radio" name="gender" value="1">男
+    <input type="radio" name="gender" value="0">女<br>
+    <input type="submit" value="添加">
+</form>
+</body>
+</html>

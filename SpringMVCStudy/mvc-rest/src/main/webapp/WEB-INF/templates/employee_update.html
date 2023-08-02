@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>更新员工</title>
+</head>
+<body>
+<form th:action="@{/employee}" method="post">
+    <input type="hidden" name="_method" value="put">
+    <input type="hidden" name="id" th:value="${employee.id}">
+    userName: <input type="text" name="userName" th:value="${employee.userName}"><br>
+    email: <input type="text" name="email" th:value="${employee.email}"><br>
+    gender: <input type="radio" name="gender" value="1" th:field="${employee.gender}">男
+    <input type="radio" name="gender" value="0" th:field="${employee.gender}">女<br>
+    <input type="submit" value="更新">
+</form>
+</body>
+</html>
