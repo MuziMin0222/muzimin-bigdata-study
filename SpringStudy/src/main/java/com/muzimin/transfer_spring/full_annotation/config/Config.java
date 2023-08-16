@@ -27,7 +27,7 @@ public class Config {
         druidDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         druidDataSource.setUrl("jdbc:mysql://localhost:3306/muzimin");
         druidDataSource.setUsername("root");
-        druidDataSource.setPassword("Lz19970222!");
+        druidDataSource.setPassword("123456");
 
         return druidDataSource;
     }

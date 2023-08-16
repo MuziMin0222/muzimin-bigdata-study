@@ -22,7 +22,7 @@ object DataStreamCDCDemo {
       .databaseList("muzimin")
       .tableList("t_book")
       .username("root")
-      .password("Lz19970222!")
+      .password("123456")
       .deserializer(new StringDebeziumDeserializationSchema)
       .build()
 

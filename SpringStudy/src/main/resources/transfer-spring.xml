@@ -13,7 +13,7 @@
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
         <property name="url" value="jdbc:mysql://localhost:3306/muzimin"/>
         <property name="username" value="root"/>
-        <property name="password" value="Lz19970222!"/>
+        <property name="password" value="123456"/>
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
     </bean>
 

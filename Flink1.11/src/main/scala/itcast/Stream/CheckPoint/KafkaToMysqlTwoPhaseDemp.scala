@@ -68,7 +68,7 @@ class MysqlTwoPhaseCommit extends TwoPhaseCommitSinkFunction[(String, Int), Mysq
 ) {
   //开启事务，pre-commit开始阶段
   override def beginTransaction(): MysqlConnectionSate = {
-    val conn: Connection = DriverManager.getConnection("jdbc:mysql://hadoop01:3306/flink", "root", "Lz19970222!")
+    val conn: Connection = DriverManager.getConnection("jdbc:mysql://hadoop01:3306/flink", "root", "123456")
     new MysqlConnectionSate(conn)
   }
 

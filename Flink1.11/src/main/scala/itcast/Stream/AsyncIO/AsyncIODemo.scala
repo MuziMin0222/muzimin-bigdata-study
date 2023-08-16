@@ -54,7 +54,7 @@ class MyAsyncFunction extends RichAsyncFunction[String, String] {
 
   //创建Mysql链接
   override def open(parameters: Configuration): Unit = {
-    conn = DriverManager.getConnection("jdbc:mysql://hadoop01:3306/flink", "root", "Lz19970222!")
+    conn = DriverManager.getConnection("jdbc:mysql://hadoop01:3306/flink", "root", "123456")
     ps = conn.prepareStatement("select * from cityMapping")
     map = new util.HashMap[String, String]()
   }

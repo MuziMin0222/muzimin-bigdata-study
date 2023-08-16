@@ -33,7 +33,7 @@ object BroadCastStateDemo {
         var flag = true
 
         override def open(parameters: Configuration): Unit = {
-          conn = DriverManager.getConnection("jdbc:mysql://hadoop01:3306/flink?useUnicode=true&characterEncoding=UTF-8", "root", "Lz19970222!")
+          conn = DriverManager.getConnection("jdbc:mysql://hadoop01:3306/flink?useUnicode=true&characterEncoding=UTF-8", "root", "123456")
           ps = conn.prepareStatement("select * from user")
         }
 
