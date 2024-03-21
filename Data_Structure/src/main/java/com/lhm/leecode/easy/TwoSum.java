@@ -1,7 +1,5 @@
 package com.lhm.leecode.easy;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +9,7 @@ import java.util.Map;
  * 两数之和
  **/
 public class TwoSum {
-    public int[] twoSum(@NotNull int[] nums, int target) {
+    public int[] twoSum(int[] nums, int target) {
         //构建哈希表，元素映射到对应的索引
         Map<Integer,Integer> map = new HashMap<Integer,Integer>();
         for(int i = 0;i < nums.length;i++){
@@ -28,7 +26,7 @@ public class TwoSum {
         return new int[]{-1,-1};
     }
 
-    public int[] MyTwoSum(@NotNull int[] nums, int target) {
+    public int[] MyTwoSum( int[] nums, int target) {
         long start = System.currentTimeMillis();
         for (int i = 0; i < nums.length; i++) {
             for (int j = i; j < nums.length; j++) {

@@ -11,6 +11,14 @@
 
     <properties resource="jdbc.properties"/>
 
+    <settings>
+        <!--设置下划线自动转为驼峰-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="logImpl" value="LOG4J"/>
+        <!--开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+    </settings>
+
     <typeAliases>
         <!--
         typeAliases: 设置某个类型的别名

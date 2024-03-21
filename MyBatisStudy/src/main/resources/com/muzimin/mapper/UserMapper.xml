@@ -27,4 +27,45 @@
     <select id="selectAll" resultType="user">
         select * from t_user
     </select>
+
+    <select id="selectByName" resultType="user">
+        <!--select * from t_user where name = #{userName}-->
+        select * from t_user where name = '${userName}'
+    </select>
+
+    <select id="selectByNameAndAge" resultType="user">
+        <!--select * from t_user where name = #{arg0} and age = #{arg1}-->
+        select * from t_user where name = '${param1}' and age = ${arg1}
+    </select>
+
+    <select id="selectByMap" resultType="user">
+        <!--select * from t_user where name = #{userName} and age = #{age}-->
+        select * from t_user where name = '${userName}' and age = ${age}
+    </select>
+
+    <insert id="insertUserClass">
+        <!--insert into t_user value(null,#{name},#{age},#{gender})-->
+        insert into t_user value(null,'${name}','${age}','${gender}')
+    </insert>
+
+    <!--List<User> selectByParams(@Param("userName") String name, @Param("age") String age);-->
+    <select id="selectByParams" resultType="user">
+        <!--select * from t_user where name = #{userName} and age = #{age}-->
+        select * from t_user where name = '${userName}' and age = '${age}'
+    </select>
+
+    <!--Map<String, Object> selectById2Map(@Param("userName") String name);-->
+    <select id="selectById2Map" resultType="map">
+        select * from t_user where id = #{id}
+    </select>
+
+    <!--List<Map<String, Object>> selectAll2Map();-->
+    <select id="selectAll2Map" resultType="map">
+        select * from t_user
+    </select>
+
+    <!--Map<String, Object> selectAll2KeyMap();-->
+    <select id="selectAll2KeyMap" resultType="map">
+        select * from t_user
+    </select>
 </mapper>

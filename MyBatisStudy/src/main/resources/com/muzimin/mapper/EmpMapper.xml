@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muzimin.mapper.EmpMapper">
+    <resultMap id="empAndDeptByStep" type="emp">
+        <id property="eid" column="e_id"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="age" column="age"/>
+        <!--
+            select: 设置分步查询SQL的唯一标识，namespace.sqlId 或者Mapper接口的全类名.方法名
+            column: 设置分步查询的条件
+            fetchType: 当开启了全局延迟加载后，可通过此配置属性手动控制延迟加载的效果
+                lazy：表示延迟加载
+                eager：表示立即加载
+        -->
+        <association property="dept"
+                     select="com.muzimin.mapper.DeptMapper.selectById"
+                     column="d_id"
+                     fetchType="eager">
+        </association>
+    </resultMap>
+
+    <!--Emp selectByEid(@Param("eid") int eid);-->
+    <select id="selectByEid" resultMap="empAndDeptByStep">
+        select * from t_emp where e_id = ${eid}
+    </select>
+
+    <!--List<Emp> getDeptAndEmpStepTwo(@Param("did") Integer did);-->
+    <select id="getDeptAndEmpStepTwo" resultType="emp">
+        select * from t_emp where d_id = ${did}
+    </select>
+</mapper>

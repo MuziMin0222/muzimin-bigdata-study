@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muzimin.mapper.DeptMapper">
+    <!--Dept selectById(@Param("did") int did);-->
+    <select id="selectById" resultType="dept">
+        select * from t_dept where d_id = ${did}
+    </select>
+
+    <resultMap id="getDeptAndEmpsStepResultMap" type="Dept">
+        <id property="did" column="d_id"/>
+        <result property="dName" column="d_name"/>
+        <!--也可以实现延迟家在-->
+        <collection property="emps"
+                    select="com.muzimin.mapper.EmpMapper.getDeptAndEmpStepTwo"
+                    column="d_id"
+                    fetchType="eager"/>
+    </resultMap>
+    <!--Dept getDeptAndEmpsStepOne(@Param("did") Integer did);-->
+    <select id="getDeptAndEmpsStepOne" resultMap="getDeptAndEmpsStepResultMap">
+        select * from t_dept where d_id = ${did}
+    </select>
+</mapper>

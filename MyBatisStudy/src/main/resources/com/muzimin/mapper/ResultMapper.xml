@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muzimin.mapper.ResultMapper">
+
+    <!--处理多对一映射关系方式一：级联属性赋值-->
+    <resultMap id="empAndDept" type="emp">
+        <id property="eid" column="e_id"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="age" column="age"/>
+        <result property="dept.did" column="d_id"/>
+        <result property="dept.dName" column="d_name"/>
+    </resultMap>
+
+    <resultMap id="empAndDept2" type="emp">
+        <id property="eid" column="e_id"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="age" column="age"/>
+        <!--
+        association: 处理多对一的映射关系
+        property：需要处理多对的映射关系属性名
+        javaType：该属性的类型
+        -->
+        <association property="dept" javaType="Dept">
+            <id property="did" column="d_id"/>
+            <result property="dName" column="d_name"/>
+        </association>
+    </resultMap>
+
+    <!--List<Emp> selectEmpById(@Param("eid") int eid);-->
+    <select id="selectEmpById" resultMap="empAndDept2">
+        SELECT * from t_emp te left join t_dept td on te.d_id = td.d_id where e_id = ${eid}
+    </select>
+
+
+    <resultMap id="deptAndEmpResultMap" type="Dept">
+        <id property="did" column="d_id"/>
+        <result property="dName" column="d_name"/>
+        <!--
+            collection: 处理一对多的映射关系
+            ofType：表示该属性所对应的集合中的存储数据的类型
+        -->
+        <collection property="emps" ofType="Emp">
+            <id property="eid" column="e_id"/>
+            <result property="name" column="name"/>
+            <result property="email" column="email"/>
+            <result property="age" column="age"/>
+        </collection>
+    </resultMap>
+
+    <!--Dept getDeptAndEmp(@Param("did") Integer did);-->
+    <select id="getDeptAndEmp" resultMap="deptAndEmpResultMap">
+        SELECT
+        td.d_id,
+        d_name,
+        e_id,
+        name,
+        email,
+        age
+        from
+        t_dept td
+        left join t_emp te on
+        td.d_id = te.d_id
+        where
+        td.d_id = ${did}
+    </select>
+</mapper>

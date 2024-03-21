@@ -1,6 +1,5 @@
 package com.lhm.leecode.easy;
 
-import org.jetbrains.annotations.Contract;
 
 /**
  * @author : 李煌民
@@ -8,7 +7,6 @@ import org.jetbrains.annotations.Contract;
  * 整数反转
  **/
 public class Reverse {
-    @Contract(pure = true)
     private int reverse(int x) {
         int ans = 0;
         while (x != 0) {

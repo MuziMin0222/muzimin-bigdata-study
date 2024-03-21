@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muzimin.mapper.SQLMapper">
+    <!--Map<String, String> selectByName(@Param("userName") String username)-->
+    <select id="selectByName" resultType="map">
+        <!--select * from t_user where name like '%${userName}%'-->
+        <!--select * from t_user where name like concat('%',#{userName},'%')-->
+        select * from t_user where name like "%"#{userName}"%"
+    </select>
+
+    <!--int deleteByIds(@Param("ids") String ids);-->
+    <delete id="deleteByIds">
+        delete from t_user where id in (${ids})
+    </delete>
+
+    <!--User selectAll(@Param("tableName") String tableName);-->
+    <select id="selectAll" resultType="user">
+        select * from ${tableName}
+    </select>
+
+    <!--int inertUser(@Param("user") User user);
+        useGeneratedKeys： 设置当前标签中的SQL使用了自增主键
+        keyProperty：将自增的主键值赋值给传输到映射文件中参数的某个属性
+    -->
+    <insert id="inertUser" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user values(null,'${name}','${age}','${gender}')
+    </insert>
+
+    <!--
+    resultMap:设置自定义映射关系
+        id: 唯一标识，不能重复
+        type：设置映射关系中的实体类型
+        result：设置普通字段的映射关系
+            property：设置映射关系中的属性名，必须是type属性所设置的实体类类型中的属性名
+            column：设置映射关系中的字段名，必须是sql语句中带有的字段名称
+
+    -->
+    <resultMap id="empResultMap" type="emp">
+        <id property="eid" column="e_id"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="age" column="age"/>
+        <result property="did" column="d_id"/>
+    </resultMap>
+    <select id="selectEmp" resultMap="empResultMap">
+        select * from t_emp
+    </select>
+
+</mapper>
