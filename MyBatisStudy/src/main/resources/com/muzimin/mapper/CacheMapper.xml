@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muzimin.mapper.CacheMapper">
+    <cache eviction="LRU"
+           flushInterval="1000"
+           size="10"
+           readOnly="true"
+    />
+
+    <!--List<Emp> getEmp(@Param("eid") Integer eid);-->
+    <select id="getEmp" resultType="emp">
+        select * from t_emp where e_id = #{eid}
+    </select>
+</mapper>

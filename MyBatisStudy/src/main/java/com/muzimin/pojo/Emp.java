@@ -1,10 +1,12 @@
 package com.muzimin.pojo;
 
+import java.io.Serializable;
+
 /**
  * @author: 李煌民
  * @date: 2024-01-09 15:40
  **/
-public class Emp {
+public class Emp implements Serializable {
     private int eid;
     private String name;
     private String email;

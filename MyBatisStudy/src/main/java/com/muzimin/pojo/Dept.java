@@ -1,12 +1,13 @@
 package com.muzimin.pojo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * @author: 李煌民
  * @date: 2024-01-09 15:41
  **/
-public class Dept {
+public class Dept implements Serializable {
     private int did;
     private String dName;
     private List<Emp> emps;

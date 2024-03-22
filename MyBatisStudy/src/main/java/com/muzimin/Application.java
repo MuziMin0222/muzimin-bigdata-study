@@ -261,4 +261,39 @@ public class Application {
 
         System.out.println(emps);
     }
+
+    @Test
+    public void testCache() throws IOException {
+        SqlSession sqlSession1 = new SqlSessionFactoryBuilder()
+                .build(Resources.getResourceAsStream("mybatis-config.xml"))
+                .openSession(true);
+
+        CacheMapper mapper1 = sqlSession1.getMapper(CacheMapper.class);
+        System.out.println(mapper1.getEmp(1));
+
+        sqlSession1.clearCache();
+
+        SqlSession sqlSession2 = new SqlSessionFactoryBuilder()
+                .build(Resources.getResourceAsStream("mybatis-config.xml"))
+                .openSession(true);
+        CacheMapper mapper2 = sqlSession1.getMapper(CacheMapper.class);
+        System.out.println(mapper2.getEmp(1));
+    }
+
+    @Test
+    public void testCache2() throws IOException {
+        InputStream resourceAsStream = Resources.getResourceAsStream("mybatis-config.xml");
+        SqlSessionFactoryBuilder factoryBuilder = new SqlSessionFactoryBuilder();
+        SqlSessionFactory build = factoryBuilder.build(resourceAsStream);
+
+        SqlSession sqlSession1 = build.openSession(true);
+        CacheMapper mapper1 = sqlSession1.getMapper(CacheMapper.class);
+        System.out.println(mapper1.getEmp(1));
+        sqlSession1.close();
+
+        SqlSession sqlSession2 = build.openSession(true);
+        CacheMapper mapper2 = sqlSession2.getMapper(CacheMapper.class);
+        System.out.println(mapper2.getEmp(1));
+        sqlSession2.close();
+    }
 }
