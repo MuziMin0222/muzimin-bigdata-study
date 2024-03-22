@@ -13,6 +13,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * @author: 李煌民
@@ -198,9 +199,9 @@ public class Application {
         //[Emp{eid=1, name='aaa', email='1234@qq.com', age=14, dept=Dept{did=1, dName='Hadoop'}}]
         Emp emp = mapper.selectByEid(1);
         /*
-        *  开启延迟加载后只执行这一条SQL语句
-        *  24/01/11 10:51:17 DEBUG selectByEid: ==>  Preparing: select * from t_emp where e_id = 1
-        * */
+         *  开启延迟加载后只执行这一条SQL语句
+         *  24/01/11 10:51:17 DEBUG selectByEid: ==>  Preparing: select * from t_emp where e_id = 1
+         * */
         System.out.println(emp.getName());
         System.out.println("===================");
         System.out.println(emp.getDept());
@@ -229,5 +230,35 @@ public class Application {
         Dept deptAndEmp = mapper.getDeptAndEmpsStepOne(1);
         //Dept{did=1, dName='Hadoop', emps=[Emp{eid=1, name='aaa', email='1234@qq.com', age=14, dept=null}, Emp{eid=3, name='ccc', email='1234@qq.com', age=16, dept=null}]}
         System.out.println(deptAndEmp);
+    }
+
+    @Test
+    public void testDynamicSql() throws IOException {
+        SqlSession sqlSession = new SqlSessionFactoryBuilder()
+                .build(Resources.getResourceAsStream("mybatis-config.xml"))
+                .openSession(true);
+
+        DynamicSqlMapper mapper = sqlSession.getMapper(DynamicSqlMapper.class);
+        //select * from t_emp where 1 = 1
+        //List<Emp> emps = mapper.getEmps(new Emp(1, null, null, 2, null));
+        //select * from t_emp where 1 = 1 and name = ?
+        //List<Emp> emps = mapper.getEmps(new Emp(1, "aaa", null, 2, null));
+        //select * from t_emp where 1 = 1 and name = ? and email = ?
+        List<Emp> emps = mapper.getEmps(new Emp(1, "aaa", "1234@qq.com", 2, null));
+
+        System.out.println(emps);
+    }
+
+    @Test
+    public void testDynamicSql2() throws IOException {
+        SqlSession sqlSession = new SqlSessionFactoryBuilder()
+                .build(Resources.getResourceAsStream("mybatis-config.xml"))
+                .openSession(true);
+
+        DynamicSqlMapper mapper = sqlSession.getMapper(DynamicSqlMapper.class);
+        //select * from t_emp WHERE e_id = ? or e_id = ? or e_id = ?
+        List<Emp> emps = mapper.getEmpsByList(new Integer[]{1, 2, 3});
+
+        System.out.println(emps);
     }
 }

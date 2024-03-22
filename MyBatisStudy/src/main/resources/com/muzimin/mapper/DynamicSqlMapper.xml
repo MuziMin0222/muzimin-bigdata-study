@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muzimin.mapper.DynamicSqlMapper">
+    <!--List<Emp> getEmps(Emp emp);-->
+    <!--   <select id="getEmps" resultType="emp">
+           select * from t_emp
+           <trim prefix="where" suffixOverrides="and|or">
+               <if test="name != null and name != ''">
+                   name = #{name} and
+               </if>
+               <if test="email != null and email != ''">
+                   email = #{email} or
+               </if>
+           </trim>
+       </select>-->
+
+    <!--   <select id="getEmps" resultType="emp">
+           select * from t_emp
+           <where>
+               <if test="name != null and name != ''">
+                   and name = #{name}
+               </if>
+               <if test="email != null and email != ''">
+                   and email = #{email}
+               </if>
+           </where>
+       </select>-->
+
+    <!--    <select id="getEmps" resultType="emp">
+            select * from t_emp where 1 = 1
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+        </select>-->
+
+    <select id="getEmps" resultType="emp">
+        select * from t_emp
+        <where>
+            <choose>
+                <when test="name != null and name != ''">
+                    name = #{name}
+                </when>
+                <when test="email != null and email != ''">
+                    email = #{email}
+                </when>
+                <otherwise>
+                    d_id = 1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!--List<Emp> getEmpsByList(@Param("ids") Integer[] ids);-->
+    <!--select * from t_emp WHERE e_id = ? or e_id = ? or e_id = ?-->
+    <!--<select id="getEmpsByList" resultType="emp">
+        select * from t_emp
+        <where>
+            <foreach collection="ids" item="eid" separator="or">
+                e_id = #{eid}
+            </foreach>
+        </where>
+    </select>-->
+
+    <sql id="empColumns">
+        e_id,name,email,age
+    </sql>
+
+    <!--select * from t_emp where e_id in ( ? , ? , ? )-->
+    <select id="getEmpsByList" resultType="emp">
+        select
+        <include refid="empColumns"/> from t_emp where e_id in
+        <foreach collection="ids" item="eid" separator="," open="(" close=")">
+            #{eid}
+        </foreach>
+    </select>
+</mapper>
