@@ -4,6 +4,7 @@ import com.muzimin.mapper.*;
 import com.muzimin.pojo.Dept;
 import com.muzimin.pojo.Emp;
 import com.muzimin.pojo.User;
+import com.muzimin.reverse.entity.EmpExample;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -295,5 +296,20 @@ public class Application {
         CacheMapper mapper2 = sqlSession2.getMapper(CacheMapper.class);
         System.out.println(mapper2.getEmp(1));
         sqlSession2.close();
+    }
+
+    @Test
+    public void testReverse() throws IOException {
+        InputStream is = Resources.getResourceAsStream("mybatis-config.xml");
+        SqlSession sqlSession = new SqlSessionFactoryBuilder()
+                .build(is)
+                .openSession(true);
+
+        com.muzimin.reverse.mapper.EmpMapper mapper = sqlSession.getMapper(com.muzimin.reverse.mapper.EmpMapper.class);
+        EmpExample empExample = new EmpExample();
+        empExample.createCriteria().andAgeBetween(1, 1000);
+        empExample.or().andEmailEqualTo("aaa");
+        System.out.println(mapper.selectByExample(empExample));
+
     }
 }

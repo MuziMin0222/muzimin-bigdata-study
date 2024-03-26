@@ -11,7 +11,7 @@
     <resultMap id="getDeptAndEmpsStepResultMap" type="Dept">
         <id property="did" column="d_id"/>
         <result property="dName" column="d_name"/>
-        <!--也可以实现延迟家在-->
+        <!--也可以实现延迟加载-->
         <collection property="emps"
                     select="com.muzimin.mapper.EmpMapper.getDeptAndEmpStepTwo"
                     column="d_id"

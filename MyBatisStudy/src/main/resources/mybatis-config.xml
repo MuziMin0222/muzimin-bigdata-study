@@ -28,7 +28,17 @@
         -->
         <!--<typeAlias type="com.muzimin.pojo.User" alias="User"/>-->
         <!--以包为单位，将包下面所有的类型设置默认的类型别名，即包下的类名，且不区分大小写-->
-        <package name="com.muzimin.pojo"/>
+        <!--<package name="com.muzimin"/>-->
+
+        <typeAlias type="com.muzimin.reverse.entity.EmpExample" alias="empE"/>
+        <typeAlias type="com.muzimin.reverse.entity.DeptExample" alias="deptE"/>
+        <typeAlias type="com.muzimin.reverse.entity.Dept" alias="deptB"/>
+        <typeAlias type="com.muzimin.reverse.entity.Emp" alias="empB"/>
+        <typeAlias type="com.muzimin.reverse.entity.UserExample" alias="userE"/>
+        <typeAlias type="com.muzimin.reverse.entity.User" alias="userB"/>
+        <typeAlias type="com.muzimin.pojo.Dept" alias="dept"/>
+        <typeAlias type="com.muzimin.pojo.Emp" alias="emp"/>
+        <typeAlias type="com.muzimin.pojo.User" alias="user"/>
     </typeAliases>
 
     <!--
@@ -74,5 +84,6 @@
                     2. mapper接口要和映射文件的名字一致
         -->
         <package name="com.muzimin.mapper"/>
+        <package name="com.muzimin.reverse.mapper"/>
     </mappers>
 </configuration>
