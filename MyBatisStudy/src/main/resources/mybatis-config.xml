@@ -40,6 +40,10 @@
         <typeAlias type="com.muzimin.pojo.Emp" alias="emp"/>
         <typeAlias type="com.muzimin.pojo.User" alias="user"/>
     </typeAliases>
+    
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
 
     <!--
     environments ：配置多个数据库的环境

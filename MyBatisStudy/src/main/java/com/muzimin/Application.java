@@ -1,5 +1,7 @@
 package com.muzimin;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.muzimin.mapper.*;
 import com.muzimin.pojo.Dept;
 import com.muzimin.pojo.Emp;
@@ -311,5 +313,32 @@ public class Application {
         empExample.or().andEmailEqualTo("aaa");
         System.out.println(mapper.selectByExample(empExample));
 
+    }
+
+    @Test
+    public void testLimit() throws IOException {
+        InputStream is = Resources.getResourceAsStream("mybatis-config.xml");
+        SqlSession sqlSession = new SqlSessionFactoryBuilder()
+                .build(is)
+                .openSession(true);
+
+        com.muzimin.reverse.mapper.EmpMapper mapper = sqlSession.getMapper(com.muzimin.reverse.mapper.EmpMapper.class);
+        EmpExample empExample = new EmpExample();
+
+        //开启分页
+        PageHelper.startPage(2, 3);
+
+        empExample.createCriteria().andAgeBetween(1, 1000);
+        empExample.or().andEmailEqualTo("aaa");
+        List<com.muzimin.reverse.entity.Emp> empList = mapper.selectByExample(empExample);
+
+        /**
+         * 获取分页相关信息
+         *    list: 表示分页数据
+         *    3： 表示导航分页的数量
+         */
+        PageInfo<com.muzimin.reverse.entity.Emp> pageInfo = new PageInfo<>(empList, 3);
+
+        System.out.println(pageInfo);
     }
 }
