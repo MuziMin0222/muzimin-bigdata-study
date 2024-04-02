@@ -1,0 +1,28 @@
+person:
+  userName: "muz  \n imin"
+  boss: true
+  birth: 2024/09/01
+  age: 25
+  pet:
+    PName: 111
+    PWeight: 222
+  interests:
+    - aaa
+    - bbb
+    - ccc
+  animal: [ aaa, vvvv, 111 ]
+  score:
+    aaa: bbbb
+    ccc: dddd
+    eee: ffff
+  salarys:
+    - 111.111
+    - 222.222
+  allPets:
+    big: [ { PName: aaa,PWeight: ccc } ,{ PName: bbb,PWeight: ddd } ]
+    small:
+      - PName: eee
+        PWeight: fff
+      - PName: ggg
+        PWeight: hhhh
+
