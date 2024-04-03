@@ -1,0 +1,14 @@
+## spring:
+##   mvc:
+##     ## 请求静态资源的时候，需要在URL后加上res/，比如http://localhost:8080/res/bbb.jpg
+##     static-path-pattern: /res/**
+##   web:
+##     resources:
+##       ## 在resources目录下，我们还可以添加/muzimin进行存放静态资源
+##       static-locations:
+##         - classpath:/muzimin
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true   #开启页面表单的Rest功能

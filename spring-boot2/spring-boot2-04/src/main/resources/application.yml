@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: spring-boot2-04

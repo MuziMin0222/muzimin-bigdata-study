@@ -19,4 +19,11 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.18</version>
     </parent>
+
+    <modules>
+        <module>spring-boot2-01</module>
+        <module>spring-boot2-02</module>
+        <module>spring-boot2-03</module>
+        <module>spring-boot2-04</module>
+    </modules>
 </project>
