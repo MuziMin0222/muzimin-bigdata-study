@@ -1,5 +1,7 @@
 package com.muzimin.controller;
 
+import com.muzimin.bean.Person;
+import com.muzimin.bean.Pet;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +37,15 @@ public class RequestController {
         map.put("request_data", msg1 + "====" + code1);
 
         return map;
+    }
+
+
+    @ResponseBody
+    @GetMapping("/save/person")
+    Person testConverter() {
+        Person person = new Person();
+        person.setUserName("person");
+        person.setPet(new Pet("aaa", "123"));
+        return person;
     }
 }

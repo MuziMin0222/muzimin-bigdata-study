@@ -1,3 +1,6 @@
 spring:
   application:
     name: spring-boot2-04
+  ##开启请求参数内容协商模式
+  contentnegotiation:
+    favor-parameter: true
