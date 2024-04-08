@@ -14,6 +14,7 @@ import java.util.Map;
 @RestController
 public class MyController {
 
+    //get http://localhost:8080/car/1/onwer/lihuangmin?aaa=11111&bbbb=121&bbbb=121212
     @GetMapping("/car/{id}/onwer/{name}")
     public Map<String, Object> testAnnotation(
             @PathVariable("id") Integer id,
@@ -24,8 +25,8 @@ public class MyController {
             @RequestParam("aaa") String aaa,
             @RequestParam("bbbb") List<String> bbbb,
             @RequestParam Map<String, Object> allRequestParam,
-            @CookieValue("_ga") Cookie cookie
-            ) {
+            @CookieValue("username-localhost-8888") Cookie cookie
+    ) {
         Map<String, Object> map = new HashMap<>();
 
         map.put("id", id);
@@ -41,6 +42,39 @@ public class MyController {
 
         map.put("cookie", cookie.getName() + "---" + cookie.getValue());
 
+        return map;
+    }
+
+    @PostMapping("/save")
+    public Map<String, Object> testRequestBody(@RequestBody String body) {
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("body", body);
+
+        return map;
+    }
+
+
+    /**
+     * 矩阵变量的请求路径：/boss/1;age=102;/emp/2;age=1111
+     * @return
+     */
+    @GetMapping("/boss/{bossId}/{empId}")
+    Map<String, Object> testMatrixVariable(@MatrixVariable(value = "age", pathVar = "bossId") Integer bAge,
+                                           @MatrixVariable(value = "age", pathVar = "empId") Integer eAge,
+                                           @PathVariable("bossId") String bossId,
+                                           @PathVariable("empId") String empId) {
+        HashMap<String, Object> map = new HashMap<>();
+
+        map.put("boss_msg", bossId + ":::" + bAge);
+        map.put("emp_msg", empId + ":::" + eAge);
+
+        /**
+         * {
+         *     "emp_msg": "2:::40",
+         *     "boss_msg": "1:::20"
+         * }
+         */
         return map;
     }
 
