@@ -4,9 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.lhm</groupId>
-    <artifactId>Data_Structure</artifactId>
+    <parent>
+        <groupId>com.lhm</groupId>
+        <artifactId>muzimin-data-structure-study</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>data-structure-01</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    
 </project>
