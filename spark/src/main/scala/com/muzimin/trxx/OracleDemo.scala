@@ -17,10 +17,10 @@ object OracleDemo {
       .read
       .format("jdbc")
       .option("driver", "oracle.jdbc.driver.OracleDriver")
-      .option("url", "jdbc:oracle:thin:@10.99.189.138:1521:hrtest")
-      .option("dbtable", "(select * from SHR0309.T_ORG_ADMIN) source")
-      .option("user", "JTCS")
-      .option("password", "JTCS2435hr")
+      .option("url", "jdbc:oracle:thin:@{IP}:{port}:hrtest")
+      .option("dbtable", "(select * from {schema_name}.{table_name}) source")
+      .option("user", "{oracle_user}")
+      .option("password", "{oracle_password}")
       .load()
 
     dataFrame.show()
