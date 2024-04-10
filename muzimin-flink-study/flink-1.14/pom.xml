@@ -2,22 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>muzimin-flink-study</artifactId>
+        <groupId>com.muzimin</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.muzimin</groupId>
-    <artifactId>muzimin-flink-study</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>flink-1.11</module>
-        <module>flink-1.12</module>
-        <module>flink-1.14</module>
-    </modules>
+    <artifactId>flink-1.14</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
-    
+
 </project>
