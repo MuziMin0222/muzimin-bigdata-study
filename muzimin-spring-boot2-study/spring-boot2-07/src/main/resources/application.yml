@@ -30,9 +30,59 @@ spring:
         config:
           drop-table-allow: false
 
+  redis:
+    ## 方式一：
+    ## url: redis://localhost:6379
+    ## 方式二：
+    host: localhost
+    port: 6379
+    ## lettuce/jedis
+    client-type: jedis
+    jedis:
+      pool:
+        max-active: 10
+
 mybatis:
   # config-location: classpath:mybatis/mybatis-config.xml  #全局配置文件位置
   mapper-locations: classpath:mybatis/mapper/*.xml  #sql映射文件位置
   ## 全局配置文件可以通过configuration来进行实现
   configuration:
     map-underscore-to-camel-case: true
+
+# management 是所有actuator的配置
+# management.endpoint.端点名.xxxx  对某个端点的具体配置
+management:
+  endpoints:
+    enabled-by-default: true  #默认开启所有监控端点  true
+    web:
+      exposure:
+        include: '*' # 以web方式暴露所有端点
+
+  endpoint:   #对某个端点的具体配置
+    health:
+      ## 展示健康状态的详细信息
+      show-details: always
+      enabled: true
+
+    info:
+      enabled: true
+
+    beans:
+      enabled: true
+
+    metrics:
+      enabled: true
+
+
+# info:
+#   appName: boot-admin
+#   appVersion: 1.0.0
+#   mavenProjectName: @project.artifactId@
+#   mavenProjectVersion: @project.version@
+info:
+  app:
+    encoding: "@project.build.sourceEncoding@"
+    java:
+      source: "@java.version@"
+      target: "@java.version@"
+      mavenProjectVersion: "@project.version@"
