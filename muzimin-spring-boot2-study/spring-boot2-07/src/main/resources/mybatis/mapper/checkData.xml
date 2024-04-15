@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.muzimin.mapper.CheckData">
+    <!--CheckDataBean getDataByDate(@Param("etlDate") String etlDate);-->
+    <select id="getDataByDate" resultType="com.muzimin.bean.CheckDataBean">
+        select * from check_data where etl_date = ${etlDate}
+    </select>
+</mapper>
