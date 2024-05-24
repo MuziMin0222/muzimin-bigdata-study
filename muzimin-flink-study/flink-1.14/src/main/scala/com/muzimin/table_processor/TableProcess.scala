@@ -10,7 +10,7 @@ import org.apache.flink.table.api.{EnvironmentSettings, TableEnvironment}
 object TableProcess {
   def main(args: Array[String]): Unit = {
     //开启批处理操作
-    val settings = EnvironmentSettings.inBatchMode()
+    /*val settings = EnvironmentSettings.inBatchMode()
     val tenv = TableEnvironment.create(settings)
 
     tenv.executeSql(
@@ -30,7 +30,7 @@ object TableProcess {
          |)
          |""".stripMargin)
 
-      tenv.executeSql("select * from demo").print()
+      tenv.executeSql("select * from demo").print()*/
   }
 
 }
