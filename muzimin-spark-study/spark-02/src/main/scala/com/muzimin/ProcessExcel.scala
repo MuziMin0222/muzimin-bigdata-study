@@ -23,24 +23,25 @@ object ProcessExcel {
     val sourceDF = spark.read.format("excel")
       .option("header", "true")
       .option("inferSchema", "true")
-      .load("/Users/muzimin/Downloads/aaa.xlsx")
+      .load("/Users/muzimin/Downloads/all_excel.xlsx")
       .cache()
 
     val tableList = sourceDF
-      .select("数据表")
+      .select("事实表")
       .distinct()
       .collect()
       .map(row => {
-        val tableName = row.getAs[String]("数据表")
+        val tableName = row.getAs[String]("事实表")
         val pattern = """^[^_]+_[^_]+_(.*)$""".r
-        if (tableName != null && tableName.trim.nonEmpty) {
+        /*if (tableName != null && tableName.trim.nonEmpty) {
           pattern.findFirstMatchIn(tableName) match {
             case Some(m) => (tableName, m.group(1))
             case None => (tableName, tableName)
           }
         } else {
           (tableName, tableName)
-        }
+        }*/
+        (tableName, tableName)
       })
       .distinct
       .filter(item => item._1 != null && item._1.trim.nonEmpty)
@@ -65,7 +66,7 @@ object ProcessExcel {
       }
       println(s"开始处理--------->：${sheetName}")
       sourceDF
-        .filter(col("数据表") === tableName._1)
+        .filter(col("事实表") === tableName._1)
         .write
         .format("com.crealytics.spark.excel")
         .option("dataAddress", s"'${sheetName}'!A1")
