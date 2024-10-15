@@ -19,7 +19,7 @@ import scala.jdk.CollectionConverters.asScalaBufferConverter
 object ReadInfluxdbToStarrocks {
   def main(args: Array[String]): Unit = {
     val format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    val startTime = "2022-01-27T04:30:00.000Z"
+    val startTime = "2022-10-22T13:40:00.000Z"
     val endTime = "2024-01-01T00:00:00.000Z"
     var startTimeStamp = format.parse(startTime).getTime
     val endTimeStamp = format.parse(endTime).getTime
@@ -58,23 +58,35 @@ object ReadInfluxdbToStarrocks {
            |tag_name = 'DXSC_MF_QM4_M4_RUNTIME_TOT_PV'
            |)
            |""".stripMargin
-      val queryResult = influxDB.query(new Query(sql))
+      val queryResult = try {
+        influxDB.query(new Query(sql))
+      } catch {
+        case e: Exception => {
+          val influxDB = InfluxDBFactory.connect(serverUrl, username, password)
+          influxDB.setDatabase("RealtimeData")
+          influxDB.query(new Query(sql))
+        }
+      }
+
       val results = queryResult.getResults
+
       val framesList = new ListBuffer[DataFrame]
+
       for (result <- results.asScala.toList) {
         val series = result.getSeries
         if (series != null) {
           for (series1 <- series.asScala.toList) {
             val values: util.List[util.List[AnyRef]] = series1.getValues
             val valuesList = values.asScala.toList
-            val dataList: List[data1] = valuesList.map(sublist => {
-              val time = String.valueOf(sublist.get(0))
-              val Value = String.valueOf(sublist.get(1))
-              val quality = String.valueOf(sublist.get(2))
-              val tagName = String.valueOf(sublist.get(3))
+            val dataList: List[data1] = valuesList
+              .map(sublist => {
+                val time = String.valueOf(sublist.get(0))
+                val Value = String.valueOf(sublist.get(1))
+                val quality = String.valueOf(sublist.get(2))
+                val tagName = String.valueOf(sublist.get(3))
 
-              data1(time, Value, quality, tagName)
-            })
+                data1(time, Value, quality, tagName)
+              })
               .filter(item => {
                 List(
                   "DSXC_BZM_SAG_IFDB_FEEDTOTAL_PV",
